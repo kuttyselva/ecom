@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import FormInput from "../form-input/form-input.component";
+import swal from '@sweetalert/with-react';
 import CustomButton from "../custom-button/custom.component";
 import "./signup.styles.scss";
 import { auth, createUserProfile } from "../../firebase/firebase.utils";
@@ -33,7 +34,12 @@ export default class Signup extends Component {
         confirmPassword: ""
       });
     } catch (error) {
-      console.log(error);
+      swal(
+        <div >
+          <h1>Error !</h1>        
+          <p>{error.message}</p>
+        </div>
+      )
     }
   };
   handleChange = e => {

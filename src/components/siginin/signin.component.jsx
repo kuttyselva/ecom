@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import FormInput from "../form-input/form-input.component";
+import swal from '@sweetalert/with-react';
 import "./signin.styles.scss";
 import CustomButton from "../custom-button/custom.component";
 import { signinGoogle, auth } from "../../firebase/firebase.utils";
@@ -11,14 +12,23 @@ export default class Signin extends Component {
       password: ""
     };
   }
+ 
   handleSubmit = async event => {
+    
+ 
     event.preventDefault();
     const {email,password}=this.state;
     try {
       await auth.signInWithEmailAndPassword(email,password);
       this.setState({ email: "", password: "" });
     } catch (error) {
-      console.log(error.message);
+      // alert(error.message);
+      swal(
+        <div >
+          <h1>Error !</h1>        
+          <p>{error.message}</p>
+        </div>
+      )
     }
    
   };
